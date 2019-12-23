@@ -1,2 +1,7 @@
-# Nodejs-Learning
-Learning Nodejs
+## Nodejs-Learning
+Backend Framework
+Be Happy
+Be Geek
+Have Patience
+Keep Practising
+
