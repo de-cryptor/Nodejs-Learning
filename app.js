@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
-const morgan = require('morgan');
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+
+//const morgan = require('morgan');
 
 /* app.use((req,res,next) => {
     res.status(200).json({
@@ -14,6 +17,9 @@ const ProductRoutes = require('./api/routes/products')
 const OrderRoutes = require('./api/routes/orders')
 
 //app.use(morgan('dev'));
+
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
 
 app.use('/products', ProductRoutes);
 app.use('/orders', OrderRoutes);
