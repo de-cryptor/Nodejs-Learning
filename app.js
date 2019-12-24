@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 
 /* app.use((req,res,next) => {
     res.status(200).json({
@@ -11,23 +9,11 @@ const mongoose = require('mongoose');
 
 }); */
 
-mongoose.connect('mongodb+srv://decryptor:8255@cluster0-kzzgf.mongodb.net/test?retryWrites=true&w=majority');
 
-const ProductRoutes = require('./api/routes/products');
-const OrderRoutes = require('./api/routes/orders');
+const ProductRoutes = require('./api/routes/products')
+const OrderRoutes = require('./api/routes/orders')
 
 //app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json())
-
-app.use((req,res,next) => {
-    res.header('Access-Control-Allow-Origin','*');
-    res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Authorization');
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Origin','PUT,PATCH,POST,DELETE');
-        return res.status(200).json({})
-    }
-});
 
 app.use('/products', ProductRoutes);
 app.use('/orders', OrderRoutes);
