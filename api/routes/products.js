@@ -6,9 +6,14 @@ const Product = require('../models/product');
 
 router.get('/', (req, res, next) => {
     Product.find()
+    .select("name price _id")
     .exec()
     .then(doc =>{
-        res.status(200).json(doc);
+        const response = {
+            count: doc.length,
+            products: doc
+        };
+        res.status(200).json(response);
     });
 });
 
@@ -42,9 +47,14 @@ router.patch('/:productId', (req, res, next) => {
 });
 
 router.delete('/:productId', (req, res, next) => {
-    res.status(200).json({
-        message: "Handling Delete Requests for products"
-    });
+
+    const id  = req.params.productId;
+    Product.remove({_id: id})
+        .exec()
+        .then(result => {
+            res.status(200).json(result);
+        });
+    
 });
 
 module.exports = router
