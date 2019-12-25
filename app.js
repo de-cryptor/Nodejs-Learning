@@ -16,6 +16,9 @@ const mongoose = require('mongoose')
 const ProductRoutes = require('./api/routes/products')
 const OrderRoutes = require('./api/routes/orders')
 
+mongoose.connect('mongodb+srv://decryptor:8255@cluster0-kzzgf.mongodb.net/test?retryWrites=true&w=majority',{
+    useMongoClient: true
+});
 //app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({extended : true}));

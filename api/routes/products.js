@@ -5,8 +5,10 @@ const mongoose = require('mongoose')
 const Product = require('../models/product');
 
 router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: "Handling Get Requests for products"
+    Product.find()
+    .exec()
+    .then(doc =>{
+        res.status(200).json(doc);
     });
 });
 
@@ -16,7 +18,7 @@ router.post('/', (req, res, next) => {
         name: req.body.name,
         price: req.body.price
     });
-    product.save();
+    product.save()
     res.status(200).json({
         message: "Handling Post Requests for products",
         createdProduct:product
@@ -25,20 +27,11 @@ router.post('/', (req, res, next) => {
 
 router.get('/:productId', (req, res, next) => {
     const id = req.params.productId;
-    if (id === "special")
-    {
-        res.status(200).json({
-            message: "You are special one.",
-            id : id
-        });
-    }
-    else
-    {
-        res.status(200).json({
-            message: "You are normal user.",
-            id : id
-        });   
-    }
+    Product.findById(id)
+    .exec()
+    .then(doc =>{
+        res.status(200).json(doc);
+    });
     
 });
 
